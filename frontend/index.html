@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="page_title_home">The Brotherhood — Illuminated Order of the Ancient Knowledge</title>
+  <meta name="description" data-i18n="meta_description_home" content="The Brotherhood — An elite, secretive order guarding ancient wisdom, hidden power, and the eternal light of truth since the dawn of civilization." />
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="config.js" defer></script>
+  <script src="i18n.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- Cursor Glow -->
+  <div id="cursor-glow"></div>
+
+  <!-- Particle Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Fog Layers -->
+  <div class="fog-layer"></div>
+  <div class="fog-layer2"></div>
+
+  <!-- ════════════ NAVIGATION ════════════ -->
+  <nav>
+    <div class="nav-logo">☽ ILLUMINATI ☾</div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#tenets" data-i18n="nav_tenets">Tenets</a></li>
+        <li><a href="shop.html" data-i18n="nav_shop">Shop</a></li>
+        <li><a href="about.html" data-i18n="nav_about">About</a></li>
+        <li><a href="help.html" data-i18n="nav_help">Help</a></li>
+        <li><a href="join.html" data-i18n="nav_join">Join Us</a></li>
+      </ul>
+      <div class="language-switcher">
+        <button id="languageToggle" class="language-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="languageMenu">
+          <span id="languageLabel">🇬🇧 English</span>
+          <span aria-hidden="true">▾</span>
+        </button>
+        <div id="languageMenu" class="language-menu" role="listbox" aria-label="Language selector"></div>
+      </div>
+    </div>
+    <button class="nav-hamburger" id="menuToggle" onclick="toggleMenu()">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </nav>
+
+  <!-- Fullscreen Menu Overlay -->
+  <div class="menu-overlay" id="menuOverlay">
+    <ul class="menu-overlay-links">
+      <li><a href='index.html' onclick='toggleMenu()' data-i18n="nav_sanctum">Home</a></li>
+      <li><a href='shop.html' onclick='toggleMenu()' data-i18n="nav_shop">Shop</a></li>
+      <li><a href='about.html' onclick='toggleMenu()' data-i18n="nav_about">About</a></li>
+      <li><a href='help.html' onclick='toggleMenu()' data-i18n="nav_help">Help</a></li>
+      <li><a href='join.html' onclick='toggleMenu()' data-i18n="nav_join">Join Us</a></li>
+    </ul>
+    <div class="menu-overlay-sigil">☽ The Eye Watches Always ☾</div>
+  </div>
+
+  <!-- ════════════ HERO ════════════ -->
+  <div id="hero">
+    <div class="hero-bg-img"></div>
+    <div class="hero-gradient"></div>
+
+    <!-- Corner decorations -->
+    <div class="corner-dec corner-tl"></div>
+    <div class="corner-dec corner-tr"></div>
+    <div class="corner-dec corner-bl"></div>
+    <div class="corner-dec corner-br"></div>
+
+    <!-- Animated Eye -->
+    <div class="eye-container">
+      <div class="eye-ring ring3"></div>
+      <div class="eye-ring ring2"></div>
+      <div class="eye-ring ring1"></div>
+      <svg id="eyeSvg" viewBox="0 0 140 140" fill="none">
+        <!-- Rays -->
+        <g stroke="rgba(255,255,255,0.35)" stroke-width="0.5" opacity="0.5">
+          <line x1="70" y1="70" x2="70" y2="0"/>
+          <line x1="70" y1="70" x2="140" y2="70"/>
+          <line x1="70" y1="70" x2="70" y2="140"/>
+          <line x1="70" y1="70" x2="0" y2="70"/>
+          <line x1="70" y1="70" x2="120" y2="20"/>
+          <line x1="70" y1="70" x2="120" y2="120"/>
+          <line x1="70" y1="70" x2="20" y2="120"/>
+          <line x1="70" y1="70" x2="20" y2="20"/>
+        </g>
+        <!-- Outer ring -->
+        <circle cx="70" cy="70" r="65" stroke="rgba(255,255,255,0.35)" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.4"/>
+        <!-- Inner ring -->
+        <circle cx="70" cy="70" r="52" stroke="rgba(255,255,255,0.25)" stroke-width="0.5" opacity="0.25"/>
+        <!-- Eye shape -->
+        <path d="M10 70 Q70 20 130 70 Q70 120 10 70Z" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.28)" stroke-width="1.2"/>
+        <!-- Iris -->
+        <circle cx="70" cy="70" r="22" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.28)" stroke-width="1"/>
+        <!-- Pupil -->
+        <circle cx="70" cy="70" r="11" fill="rgba(255,255,255,0.7)" class="eye-pupil"/>
+        <!-- Glint -->
+        <circle cx="75" cy="65" r="3" fill="rgba(255,255,255,0.75)"/>
+        <!-- Triangle inside eye -->
+        <polygon points="70,52 84,82 56,82" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="0.8" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <!-- Hero Text -->
+    <div class="hero-content">
+      <p class="hero-subtitle" data-i18n="hero_subtitle">Est. Anno Lucis 6000 — The Eternal Order</p>
+      <h1 class="hero-title" data-i18n="hero_title">The Brotherhood</h1>
+      <p class="hero-tagline" data-i18n="hero_tagline">Knowledge · Power · Illumination · Truth</p>
+      <a href="#gallery" class="hero-cta" data-i18n="hero_cta_enter">Enter the Sanctum</a>
+      <a class='hero-cta' href='join.html' data-i18n="hero_cta_join">✦ Join Us</a>
+      <a class='hero-cta hero-cta-shop' href='shop.html' data-i18n="hero_cta_shop">⬡ Sacred Artifacts Shop</a>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+      <span>Descend</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+
+  <div class="neon-divider"></div>
+
+  <!-- ════════════ PYRAMID ════════════ -->
+  <section id="pyramid-section">
+    <div class="reveal">
+      <p class="section-label" data-i18n="pyramid_label">Pyramid of Evidence</p>
+      <h2 class="section-title" data-i18n="pyramid_title">The Pyramid of Evidence</h2>
+      <p class="section-subtitle" data-i18n="pyramid_subtitle">Proof of our order’s authority is encoded in sacred geometry, visible only to those who recognise its evidence.</p>
+      <p class="section-body" style="margin:0 auto;" data-i18n="pyramid_body">
+        The pyramid stands as humanity's most enduring monument to power, precision, and hidden knowledge.
+        Its geometry encodes the secrets of the cosmos — a bridge between earth and the celestial realm above.
+        The unfinished capstone represents the work yet undone; the eye above it, the omniscient guardian of truth.
+      </p>
+    </div>
+    <div class="pyramid-wrap reveal">
+      <img src="pyramid_eye_hero.png" alt="Pyramid of Evidence" class="pyramid-image" />
+    </div>
+    <p class="pyramid-label reveal">Novus Ordo Seclorum — New Order of the Ages</p>
+  </section>
+
+  <div class="neon-divider"></div>
+
+  <!-- ════════════ GALLERY ════════════ -->
+  <div id="gallery">
+    <div class="reveal">
+      <p class="section-label" data-i18n="testimonies_label">Voices of the Brotherhood</p>
+      <h2 class="section-title" data-i18n="testimonies_title">Testimonies of the Initiated</h2>
+      <p class="section-body" data-i18n="testimonies_body">
+        These members share what the Brotherhood has meant to them — clarity, discipline, community, and a deeper sense of purpose.
+      </p>
+    </div>
+
+    <div class="gallery-grid">
+
+      <!-- Card 1 -->
+      <div class="gallery-card">
+        <div class="card-number">01 / 04</div>
+        <img src="V.G.JPG" alt="V.G." loading="lazy"/>
+        <div class="gallery-card-body">
+          <h3 class="gallery-card-title">V.G.</h3>
+          <p class="gallery-card-text">
+            “The Brotherhood gave me a sense of direction and confidence that I had been missing for years. It helped me see my purpose more clearly.”
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="gallery-card">
+        <div class="card-number">02 / 04</div>
+        <img src="Amethyst R..JPG" alt="Amethyst R." loading="lazy"/>
+        <div class="gallery-card-body">
+          <h3 class="gallery-card-title">Amethyst R.</h3>
+          <p class="gallery-card-text">
+            “I found a community that values wisdom, discipline, and real connection. The experience has been deeply grounding and transformative.”
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="gallery-card">
+        <div class="card-number">03 / 04</div>
+        <img src="Tony R.JPG" alt="Tony R." loading="lazy"/>
+        <div class="gallery-card-body">
+          <h3 class="gallery-card-title">Tony R.</h3>
+          <p class="gallery-card-text">
+            “The teachings and support here have helped me stretch beyond my limits and grow into a stronger version of myself.”
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="gallery-card">
+        <div class="card-number">04 / 04</div>
+        <img src="Collins.H.JPG" alt="Collins H." loading="lazy"/>
+        <div class="gallery-card-body">
+          <h3 class="gallery-card-title">Collins H.</h3>
+          <p class="gallery-card-text">
+            “This space feels timeless, welcoming, and profoundly empowering. It has helped me reconnect with my values and inner balance.”
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="neon-divider"></div>
+
+  <!-- ════════════ SACRED GEOMETRY ════════════ -->
+  <section id="geometry">
+    <div class="reveal-left">
+  
+    </div>
+    <div class="reveal-right">
+      <p class="section-label">Mathesis Universalis</p>
+      <h2 class="section-title">The Mathematics of the Divine</h2>
+      <p class="section-body">
+        Long before modern science, the Brotherhood understood that the universe is mathematical
+        in its deepest nature. The Flower of Life — a pattern of overlapping circles — contains
+        within it every form that exists in nature: from the DNA double helix to galactic spirals.
+        <br/><br/>
+        Metatron's Cube, derived from the Flower of Life, contains all five Platonic Solids —
+        the building blocks of physical reality. Initiates who master this geometry gain an
+        intuitive understanding of how consciousness shapes matter.
+        <br/><br/>
+        The Golden Ratio (φ = 1.618…) threads through all living systems, architecture, music,
+        and even the distribution of prime numbers — it is the fingerprint of the Creator.
+      </p>
+    </div>
+  </section>
+
+  <div class="neon-divider"></div>
+
+  <!-- ════════════ SYMBOLS ════════════ -->
+  <div id="symbols">
+    <div class="reveal">
+      <p class="section-label" data-i18n="symbols_label">Ancient Sigils</p>
+      <h2 class="section-title" data-i18n="symbols_title">Symbols of the Order</h2>
+      <p class="section-body" style="margin:0 auto 0;" data-i18n="symbols_body">
+        Each symbol carries centuries of encoded meaning. To the uninitiated, they are mere decoration.
+        To those with eyes to see, they are a complete language of power.
+      </p>
+    </div>
+
+    <div class="symbols-grid">
+      <div class="symbol-card">
+        <div class="symbol-icon">△</div>
+        <div class="symbol-name">The Triangle</div>
+        <div class="symbol-desc">The trinity of power: knowledge, wisdom, and understanding. The most stable geometric form — as above, so below.</div>
+      </div>
+      <div class="symbol-card">
+        <div class="symbol-icon">◉</div>
+        <div class="symbol-name">The Eye</div>
+        <div class="symbol-desc">Oculus Dei. Divine omniscience watching over all creation. Neither sleeping nor deceived by mortal illusion.</div>
+      </div>
+      <div class="symbol-card">
+        <div class="symbol-icon">✦</div>
+        <div class="symbol-name">The Star</div>
+        <div class="symbol-desc">The Blazing Star of the Masonic tradition — the light of reason and divine intelligence guiding humanity's path.</div>
+      </div>
+      <div class="symbol-card">
+        <div class="symbol-icon">⬡</div>
+        <div class="symbol-name">The Hexagram</div>
+        <div class="symbol-desc">The Star of creation — the union of opposing forces, heaven and earth, masculine and feminine, forming perfect unity.</div>
+      </div>
+      <div class="symbol-card">
+        <div class="symbol-icon">☽</div>
+        <div class="symbol-name">The Crescent</div>
+        <div class="symbol-desc">Cycles of time, death and rebirth. The moon that governs tides, minds, and the hidden rhythms of civilization.</div>
+      </div>
+      <div class="symbol-card">
+        <div class="symbol-icon">∞</div>
+        <div class="symbol-name">The Infinite</div>
+        <div class="symbol-desc">The lemniscate — eternity without boundary. The Brotherhood's mission transcends all mortal lifespans.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="neon-divider"></div>
+
+  <!-- ════════════ TENETS ════════════ -->
+  <section id="tenets">
+    <div class="reveal" style="margin-bottom:0;">
+      <p class="section-label" data-i18n="pillars_label">The Ancient Code</p>
+      <h2 class="section-title" data-i18n="pillars_title">Pillars of the Order</h2>
+      <p class="section-body" data-i18n="pillar_body_intro">The Brotherhood's foundations rest upon eternal principles that have governed every great civilization throughout recorded history.</p>
+    </div>
+    <div class="tenets-grid">
+      <div class="tenet-item">
+        <div class="tenet-num">I</div>
+        <div class="tenet-line"></div>
+        <h3 class="tenet-title">Omniscience</h3>
+        <p class="tenet-text">Knowledge is the ultimate power. The Brotherhood accumulates, protects, and selectively reveals truth across generations — ensuring wisdom never perishes from the earth.</p>
+      </div>
+      <div class="tenet-item">
+        <div class="tenet-num">II</div>
+        <div class="tenet-line"></div>
+        <h3 class="tenet-title">Sovereignty</h3>
+        <p class="tenet-text">True power operates without announcement. Those who shape the world do so from the shadows — guiding the hands of kings and presidents without ever seeking the throne.</p>
+      </div>
+      <div class="tenet-item">
+        <div class="tenet-num">III</div>
+        <div class="tenet-line"></div>
+        <h3 class="tenet-title">Illumination</h3>
+        <p class="tenet-text">The light of reason, science, and esoteric truth must forever battle the darkness of ignorance. The Brotherhood carries this flame across the centuries.</p>
+      </div>
+      <div class="tenet-item">
+        <div class="tenet-num">IV</div>
+        <div class="tenet-line"></div>
+        <h3 class="tenet-title">Hierarchy</h3>
+        <p class="tenet-text">Not all are ready for all truths. Degrees of initiation exist so that the deepest secrets reach only those whose minds and character can bear the weight of true knowledge.</p>
+      </div>
+      <div class="tenet-item">
+        <div class="tenet-num">V</div>
+        <div class="tenet-line"></div>
+        <h3 class="tenet-title">Perpetuity</h3>
+        <p class="tenet-text">The Brotherhood endures beyond any individual member. Its structures, symbols, and knowledge are preserved in living institutions that outlast any single generation.</p>
+      </div>
+      <div class="tenet-item">
+        <div class="tenet-num">VI</div>
+        <div class="tenet-line"></div>
+        <h3 class="tenet-title">Silence</h3>
+        <p class="tenet-text">The first and final oath. What is spoken in the inner chamber remains within. The most powerful forces in history have always operated behind the veil of absolute discretion.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="neon-divider"></div>
+
+  <!-- ════════════ CHAMBER ════════════ -->
+  <section id="chamber">
+    <div class="reveal-right">
+      <p class="section-label" data-i18n="chamber_label">The Inner Sanctum</p>
+      <h2 class="section-title" data-i18n="chamber_title">Where Decisions Are Made</h2>
+      <p class="section-body" data-i18n="chamber_body">
+        The secret chamber is not merely a physical space — it is a state of consciousness.
+        When initiates gather beneath the great seal, lit only by the seven candles of wisdom,
+        they enter a dimension of thought untouched by the noise and confusion of the outer world.
+        <br/><br/>
+        Here, the Brotherhood's highest councils have shaped the outcome of revolutions, steered
+        the rise and fall of empires, and guided the slow advance of civilization toward its
+        ultimate, luminous destiny.
+        <br/><br/>
+        The compass and square upon the floor are not decorative. They represent the perfect
+        measurement of truth — that all things in the universe are geometrically ordered,
+        and that those who understand this geometry hold the key to mastery over the material world.
+      </p>
+    </div>
+    <div class="reveal-left">
+      <img src="secret_chamber.png" alt="Secret Chamber" class="chamber-img" loading="lazy" />
+    </div>
+  </section>
+
+  <div class="neon-divider"></div>
+
+  <!-- ════════════ PAGE DIRECTORY ════════════ -->
+  <section id="page-directory">
+    <div class="reveal">
+      <p class="section-label">The Brotherhood Network</p>
+      <h2 class="section-title">All Chambers</h2>
+      <p class="section-body">Every destination in the Brotherhood, gathered in one place.</p>
+    </div>
+    <div class="page-directory-grid reveal">
+      <a class="page-directory-card" href="about.html">
+        <span class="page-directory-symbol">◉</span>
+        <span class="page-directory-title">About the Brotherhood</span>
+        <span class="page-directory-description">History, values, and the leaders behind the order.</span>
+      </a>
+      <a class="page-directory-card" href="join.html">
+        <span class="page-directory-symbol">✦</span>
+        <span class="page-directory-title">Join the Order</span>
+        <span class="page-directory-description">Begin your application for initiation.</span>
+      </a>
+      <a class="page-directory-card" href="shop.html">
+        <span class="page-directory-symbol">◇</span>
+        <span class="page-directory-title">Sacred Artifacts</span>
+        <span class="page-directory-description">Browse the Brotherhood collection.</span>
+      </a>
+      <a class="page-directory-card" href="help.html">
+        <span class="page-directory-symbol">?</span>
+        <span class="page-directory-title">Help and Contact</span>
+        <span class="page-directory-description">Find answers or send a message to the order.</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="neon-divider"></div>
+
+  <!-- ════════════ QUOTE ════════════ -->
+  <div class="quote-section">
+    <div class="reveal">
+      <p class="quote-text" data-i18n="quote_text">
+        The order of things is not random. Every civilisation that has ever risen has done so
+        because certain men understood certain truths that others did not.
+      </p>
+      <p class="quote-attr" data-i18n="quote_attr">— Codex Illuminatus, Volume VII, Restricted Access</p>
+    </div>
+  </div>
+
+  <!-- ════════════ FOOTER ════════════ -->
+  <footer>
+    <div class="footer-eye">◉</div>
+    <div class="footer-logo">The Brotherhood</div>
+    <p class="footer-latin">ORDO AB CHAO · IN HOC SIGNO VINCES · LUX ET VERITAS</p>
+    <p style="font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:3px;color:rgba(255,255,255,0.12);margin-top:10px;">
+      Est. Anno Lucis VI · All Rights Preserved · The Eye Watches Always
+    </p>
+  </footer>
+
+</script>
+  <script src="script.js"></script>
+  <script src="https://cdn.chatway.app/widget.js?id=SR6UPRBjVVcC" async></script>
+  <a class="whatsapp-float" href="#" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp" title="Chat with us on WhatsApp">
+    <img src="whatsapp%20icon.jpg" alt="WhatsApp">
+  </a>
+</body>
+</html>

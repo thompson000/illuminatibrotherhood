@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title data-i18n="page_title_join">Join Us — The Brotherhood Illuminated Order</title>
+<meta name="description" data-i18n="meta_description_join" content="Apply to join the Brotherhood and begin your journey into ancient knowledge, sacred symbols, and the inner sanctum."/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+.join-hero { position: relative; padding: 160px 60px 90px; text-align: center; background: radial-gradient(ellipse 60% 50% at 50% 30%, rgba(255,255,255,0.05) 0%, transparent 70%); }
+.join-hero h1 { font-family:'Cinzel Decorative',serif; font-size:clamp(2.2rem,5vw,4rem); color: var(--gold); text-shadow: 0 0 28px rgba(214,185,111,.24), 0 0 60px rgba(214,185,111,.08); margin-bottom: 14px; }
+.join-hero p { font-family:'Raleway',sans-serif; color: rgba(255,255,255,.65); font-size:1rem; max-width:700px; margin:0 auto; line-height:1.9; }
+.join-grid { display:grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; max-width: 1200px; margin: 0 auto; padding: 80px 60px; }
+.join-info { display:flex; flex-direction:column; gap: 24px; }
+.join-info h2 { font-family:'Cinzel Decorative',serif; color: var(--gold); font-size: clamp(2rem,3.5vw,3.4rem); margin-bottom: 0; }
+.join-info .section-body { max-width:none; }
+.join-form { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 28px; padding: 34px; box-shadow: 0 20px 60px rgba(0,0,0,0.24); }
+.join-form label { display:block; margin-bottom: 10px; font-family:'Cinzel',serif; font-size:0.78rem; letter-spacing:2px; color: var(--gold); text-transform:uppercase; }
+.join-form input,
+.join-form textarea,
+.join-form select { width:100%; border:1px solid rgba(255,255,255,0.12); border-radius:16px; background: rgba(0,0,0,0.65); color: var(--white); padding: 14px 16px; font-family:'Raleway',sans-serif; font-size:0.95rem; margin-bottom: 22px; }
+.join-form textarea { min-height:180px; resize: vertical; }
+.join-form button { width:100%; padding:16px 18px; border:none; border-radius:999px; background: rgba(214,185,111,0.14); color: var(--white); font-family:'Cinzel',serif; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease; }
+.join-form button:hover { transform: translateY(-2px); background: rgba(214,185,111,0.22); box-shadow: var(--glow); }
+#successMsg { display:none; margin-top: 12px; padding: 18px 20px; border-radius: 18px; background: rgba(29, 28, 24, 0.92); border: 1px solid rgba(214,185,111,0.2); color: rgba(255,255,255,0.92); }
+@media(max-width: 980px) { .join-grid { grid-template-columns: 1fr; padding: 60px 24px; } }
+</style>
+</head>
+<body>
+<div id="cursor-glow"></div>
+<canvas id="particle-canvas"></canvas>
+<div class="fog-layer"></div>
+
+<nav>
+  <div class="nav-logo">☽ ILLUMINATI ☾</div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="index.html" data-i18n="nav_sanctum">Sanctum</a></li>
+      <li><a href="shop.html" data-i18n="nav_shop">Shop</a></li>
+      <li><a href="about.html" data-i18n="nav_about">About</a></li>
+      <li><a href="help.html" data-i18n="nav_help">Help</a></li>
+      <li><a class="active" href="join.html" data-i18n="nav_join">Join Us</a></li>
+    </ul>
+    <div class="language-switcher">
+      <button id="languageToggle" class="language-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="languageMenu">
+        <span id="languageLabel">🇬🇧 English</span>
+        <span aria-hidden="true">▾</span>
+      </button>
+      <div id="languageMenu" class="language-menu" role="listbox" aria-label="Language selector"></div>
+    </div>
+  </div>
+  <button class="nav-hamburger" id="menuToggle" onclick="toggleMenu()">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+</nav>
+<div class="menu-overlay" id="menuOverlay">
+  <ul class="menu-overlay-links">
+    <li><a href="index.html" onclick="toggleMenu()" data-i18n="nav_sanctum">Sanctum</a></li>
+    <li><a href="shop.html" onclick="toggleMenu()" data-i18n="nav_shop">Shop</a></li>
+    <li><a href="about.html" onclick="toggleMenu()" data-i18n="nav_about">About</a></li>
+    <li><a href="help.html" onclick="toggleMenu()" data-i18n="nav_help">Help</a></li>
+    <li><a href="join.html" onclick="toggleMenu()" data-i18n="nav_join">Join Us</a></li>
+</div>
+
+<section class="join-hero">
+  <p class="section-label" data-i18n="join_hero_label">Initiation Request</p>
+  <h1 data-i18n="join_hero_title">Apply to Join the Brotherhood</h1>
+  <p data-i18n="join_hero_body">Step forward for a path of hidden knowledge, ceremonial order, and access to the inner sanctum. This application is the first proof of your intent.</p>
+</section>
+
+<section class="join-grid">
+  <div class="join-info reveal">
+    <p class="section-label" data-i18n="join_seeks_label">What We Seek</p>
+    <h2 data-i18n="join_seeks_title">Those Who Are Called</h2>
+    <p class="section-body">The Brotherhood evaluates candidates by their conviction, character, and willingness to carry the burden of secrecy. We welcome those who honour tradition, seek truth, and are prepared to shoulder responsibility.</p>
+    <p class="section-body">If you are ready to join our order, complete the application below. Each submission is reviewed by council, and only those aligned with the path will be invited further.</p>
+    <ul class="section-body" style="list-style: none; padding-left: 0;">
+      <li data-i18n="join_seeks_item1">• A clear purpose for seeking membership</li>
+      <li data-i18n="join_seeks_item2">• Respect for tradition and discretion</li>
+      <li data-i18n="join_seeks_item3">• A willingness to learn sacred symbols and rituals</li>
+    </ul>
+  </div>
+
+  <div class="join-form reveal">
+    <form id="joinForm">
+      <label for="fullName" data-i18n="join_name_label">Full Name</label>
+      <input type="text" id="fullName" name="fullName" placeholder="First and last name" data-i18n-placeholder="join_name_placeholder" required />
+      <label for="email" data-i18n="join_email_label">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="yourname@example.com" data-i18n-placeholder="join_email_placeholder" required />
+      <label for="country" data-i18n="join_country_label">Country</label>
+      <input type="text" id="country" name="country" placeholder="Country of residence" data-i18n-placeholder="join_country_placeholder" required />
+      <label for="profession" data-i18n="join_profession_label">Profession</label>
+      <input type="text" id="profession" name="profession" placeholder="Your primary vocation" data-i18n-placeholder="join_profession_placeholder" />
+      <label for="motivation" data-i18n="join_motivation_label">Why do you seek initiation?</label>
+      <textarea id="motivation" name="motivation" placeholder="Describe your motivation in a few sentences" data-i18n-placeholder="join_motivation_placeholder" required></textarea>
+      <button type="submit" data-i18n="join_submit_button">Submit Application</button>
+      <div id="successMsg" data-i18n="join_success">Your application has been submitted. The council will review it and contact you if you are invited to proceed.</div>
+    </form>
+  </div>
+</section>
+
+  <script src="config.js" defer></script>
+  <script src="i18n.js" defer></script>
+  <script src="script.js"></script>
+  <script src="https://cdn.chatway.app/widget.js?id=SR6UPRBjVVcC" async></script>
+  <a class="whatsapp-float" href="#" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp" title="Chat with us on WhatsApp">
+    <img src="whatsapp%20icon.jpg" alt="WhatsApp">
+  </a>
+</body>
+</html>

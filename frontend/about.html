@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>About — The Brotherhood Illuminated Order</title>
+<meta name="description" content="The Brotherhood — a millennia-old order guarding the world's most powerful ancient knowledge, shaping civilisations from the shadows."/>
+<link rel="stylesheet" href="style.css"/>
+<script src="config.js" defer></script>
+<script src="i18n.js" defer></script>
+<script src="script.js" defer></script>
+<style>
+.about-hero{position:relative;padding:160px 60px 90px;text-align:center;background:radial-gradient(ellipse 60% 50% at 50% 30%,rgba(255,255,255,.05) 0%,transparent 70%);}
+.about-hero h1{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,5vw,4rem);color:var(--gold);text-shadow:0 0 28px rgba(214,185,111,.2),0 0 60px rgba(214,185,111,.08);margin-bottom:14px;}
+.about-hero p{font-family:'Raleway',sans-serif;color:rgba(255,255,255,.58);font-size:.95rem;letter-spacing:2px;max-width:650px;margin:0 auto;}
+.about-section{max-width:1200px;margin:0 auto;padding:90px 60px;position:relative;z-index:2;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.gold-line{width:50px;height:1px;background:rgba(255,255,255,.4);margin-bottom:18px;}
+.about-section p{font-family:'Raleway',sans-serif;font-size:.92rem;line-height:1.9;color:rgba(255,255,255,.62);margin-bottom:16px;}
+/* TIMELINE */
+.timeline{padding:80px 60px;max-width:900px;margin:0 auto;position:relative;z-index:2;}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,rgba(255,255,255,.3) 10%,rgba(255,255,255,.3) 90%,transparent);transform:translateX(-50%);}
+.t-item{position:relative;width:50%;padding:0 50px 60px;box-sizing:border-box;}
+.t-item:nth-child(odd){left:0;text-align:right;}
+.t-item:nth-child(even){left:50%;}
+.t-dot{position:absolute;width:12px;height:12px;background:var(--white);border-radius:50%;top:6px;box-shadow:0 0 12px rgba(255,255,255,.2),0 0 30px rgba(255,255,255,.12);}
+.t-item:nth-child(odd) .t-dot{right:-6px;}
+.t-item:nth-child(even) .t-dot{left:-6px;}
+.t-year{font-family:'Cinzel Decorative',serif;font-size:.85rem;color:var(--white);margin-bottom:6px;}
+.t-event{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:2px;color:rgba(255,255,255,.8);text-transform:uppercase;margin-bottom:8px;}
+.t-desc{font-family:'Raleway',sans-serif;font-size:.82rem;line-height:1.7;color:rgba(255,255,255,.52);}
+/* VALUES */
+.values-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px;margin-top:50px;}
+.value-card{padding:36px 28px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.02);position:relative;transition:all .4s;}
+.value-card:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.04);transform:translateY(-5px);}
+.value-icon{font-size:2.2rem;margin-bottom:14px;display:block;filter:drop-shadow(0 0 10px rgba(255,255,255,.2));}
+.value-title{font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:3px;color:var(--white);text-transform:uppercase;margin-bottom:10px;}
+.value-text{font-family:'Raleway',sans-serif;font-size:.82rem;line-height:1.75;color:rgba(255,255,255,.52);}
+/* QUOTE */
+.about-quote{padding:80px 60px;text-align:center;position:relative;z-index:2;background:linear-gradient(180deg,transparent,rgba(255,255,255,.02) 50%,transparent);}
+.about-quote blockquote{font-family:'Cinzel Decorative',serif;font-size:clamp(1rem,2.5vw,1.6rem);color:var(--white);text-shadow:0 0 20px rgba(255,255,255,.14);max-width:800px;margin:0 auto 16px;line-height:1.6;}
+.about-quote cite{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:4px;color:rgba(255,255,255,.5);}
+/* LEADERSHIP */
+.leaders{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px;margin-top:50px;}
+.leader-card{border:1px solid rgba(255,255,255,.12);text-align:center;padding:40px 24px;background:rgba(255,255,255,.02);transition:all .4s;}
+.leader-card:hover{border-color:rgba(255,255,255,.3);transform:translateY(-5px);}
+.leader-avatar{width:80px;height:80px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.12),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:2rem;}
+.leader-title{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:3px;color:var(--white);text-transform:uppercase;margin-bottom:6px;}
+.leader-rank{font-family:'Raleway',sans-serif;font-size:.75rem;color:rgba(255,255,255,.42);margin-bottom:10px;}
+.leader-note{font-family:'Raleway',sans-serif;font-size:.78rem;line-height:1.6;color:rgba(255,255,255,.4);}
+@media(max-width:768px){.two-col{grid-template-columns:1fr;gap:40px;}.about-section{padding:60px 24px;}.timeline{padding:60px 24px;}.timeline::before{left:20px;}.t-item{width:100%;left:0!important;padding:0 24px 50px 50px;text-align:left!important;}.t-item .t-dot{left:14px!important;right:auto!important;}.about-quote{padding:60px 24px;}.leaders{padding:0;}}
+</style>
+</head>
+<body>
+<div id="cursor-glow"></div>
+<canvas id="particle-canvas"></canvas>
+<div class="fog-layer"></div>
+
+<nav>
+  <div class="nav-logo">☽ ILLUMINATI ☾</div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href='/system%20structure/frontend/shop' data-i18n="nav_shop">Shop</a></li>
+      <li><a class="active" href='/system%20structure/frontend/about' data-i18n="nav_about">About</a></li>
+      <li><a href='/system%20structure/frontend/help' data-i18n="nav_help">Help</a></li>
+      <li><a href='join.html' data-i18n="nav_join">Join Us</a></li>
+    </ul>
+    <div class="language-switcher">
+      <button id="languageToggle" class="language-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="languageMenu">
+        <span id="languageLabel">🇬🇧 English</span>
+        <span aria-hidden="true">▾</span>
+      </button>
+      <div id="languageMenu" class="language-menu" role="listbox" aria-label="Language selector"></div>
+    </div>
+  </div>
+  <button class="nav-hamburger" id="menuToggle" onclick="toggleMenu()">
+    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+  </button>
+</nav>
+<div class="menu-overlay" id="menuOverlay">
+  <ul class="menu-overlay-links">
+      <li><a href='/system%20structure/frontend/' onclick='toggleMenu()' data-i18n="nav_sanctum">Sanctum</a></li>
+      <li><a href='/system%20structure/frontend/shop' onclick='toggleMenu()' data-i18n="nav_shop">Shop</a></li>
+      <li><a href='/system%20structure/frontend/about' onclick='toggleMenu()' data-i18n="nav_about">About</a></li>
+      <li><a href='/system%20structure/frontend/help' onclick='toggleMenu()' data-i18n="nav_help">Help</a></li>
+      <li><a href='join.html' onclick='toggleMenu()' data-i18n="nav_join">Join Us</a></li>
+</div>
+
+<div class="about-hero">
+  <p class="section-label" style="margin-bottom:14px;" data-i18n="about_hero_label">Anno Lucis VI · Est. Since The Dawn</p>
+  <h1 data-i18n="about_hero_title">The Brotherhood</h1>
+  <p data-i18n="about_hero_body">We are the architects of civilisation — the unseen hand that has guided humanity's most critical turning points for millennia.</p>
+</div>
+<div class="neon-divider"></div>
+
+<!-- WHO WE ARE -->
+<div class="about-section">
+  <div class="two-col">
+    <div class="reveal-left">
+      <p class="section-label" data-i18n="about_identity_label">Our Identity</p>
+      <h2 class="section-title" data-i18n="about_identity_title">Who We Are</h2>
+      <div class="gold-line"></div>
+      <p data-i18n="about_identity_body1">The Brotherhood is not a conspiracy — it is a covenant. A sacred bond between individuals of extraordinary intellect, discipline, and vision who have chosen to dedicate their lives to something greater than personal ambition.</p>
+      <p data-i18n="about_identity_body2">We exist in every nation, every institution, and every era of human history. Our members have included philosophers, kings, scientists, artists, and leaders whose names history remembers — though not for their Brotherhood membership.</p>
+      <p data-i18n="about_identity_body3">We do not seek power. We <em>exercise</em> it — quietly, precisely, and in service of a vision that extends beyond any single lifetime.</p>
+    </div>
+    <div class="reveal-right" style="text-align:center;">
+      <svg viewBox="0 0 300 300" width="280" height="280" style="filter:drop-shadow(0 0 30px rgba(255,255,255,.18));">
+        <circle cx="150" cy="150" r="140" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+        <circle cx="150" cy="150" r="110" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="1" stroke-dasharray="4 3"/>
+        <polygon points="150,30 270,240 30,240" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/>
+        <polygon points="150,270 30,60 270,60" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
+        <circle cx="150" cy="130" r="28" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.6)" stroke-width="1"/>
+        <path d="M90 130 Q150 80 210 130 Q150 180 90 130Z" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.6)" stroke-width="1"/>
+        <circle cx="150" cy="130" r="10" fill="rgba(255,255,255,.7)" opacity=".8"/>
+        <circle cx="155" cy="125" r="3" fill="rgba(255,255,255,0.75)"/>
+      </svg>
+      <p style="font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:4px;color:rgba(255,255,255,.45);margin-top:16px;">SIGILLUM FRATRIS ILLUMINATI</p>
+    </div>
+  </div>
+</div>
+<div class="neon-divider"></div>
+
+<!-- TIMELINE -->
+<div style="text-align:center;padding:60px 60px 0;position:relative;z-index:2;">
+  <p class="section-label">Through The Ages</p>
+  <h2 class="section-title">A History Written in Shadows</h2>
+</div>
+<div class="timeline">
+  <div class="t-item reveal">
+    <div class="t-dot"></div>
+    <div class="t-year">3000 BCE</div>
+    <div class="t-event">The First Circle</div>
+    <div class="t-desc">Priests of the ancient Egyptian temples form the first documented Brotherhood circle, encoding sacred geometry and astronomical knowledge into pyramid architecture.</div>
+  </div>
+  <div class="t-item reveal">
+    <div class="t-dot"></div>
+    <div class="t-year">500 BCE</div>
+    <div class="t-event">The Pythagoras Covenant</div>
+    <div class="t-desc">Pythagoras establishes a secret mathematical Brotherhood in Croton, teaching that numbers are the true language of reality — a founding principle still held sacred today.</div>
+  </div>
+  <div class="t-item reveal">
+    <div class="t-dot"></div>
+    <div class="t-year">1119 CE</div>
+    <div class="t-event">The Knights Templar</div>
+    <div class="t-desc">Nine knights form a secret order under the Temple of Solomon. They amass forbidden knowledge, wealth, and global influence before their public suppression in 1307 — their true legacy hidden in plain sight.</div>
+  </div>
+  <div class="t-item reveal">
+    <div class="t-dot"></div>
+    <div class="t-year">1717 CE</div>
+    <div class="t-event">The Grand Lodge Era</div>
+    <div class="t-desc">The Brotherhood reorganises under public Freemasonry as a veil, while the true inner circle continues its deeper work among the architects of the Enlightenment and the new republic.</div>
+  </div>
+  <div class="t-item reveal">
+    <div class="t-dot"></div>
+    <div class="t-year">1776 CE</div>
+    <div class="t-event">The New World Order</div>
+    <div class="t-desc">Brotherhood members among the Founding Fathers encode sacred symbols into the architecture of a new nation — the all-seeing eye and pyramid appear on the Great Seal. "Novus Ordo Seclorum."</div>
+  </div>
+  <div class="t-item reveal">
+    <div class="t-dot"></div>
+    <div class="t-year">Present</div>
+    <div class="t-event">The Digital Sanctum</div>
+    <div class="t-desc">The Brotherhood adapts to the information age, operating through encrypted channels, distributed networks, and selective revelation to those who are ready to receive the light.</div>
+  </div>
+</div>
+<div class="neon-divider"></div>
+
+<!-- VALUES -->
+<div class="about-section">
+  <p class="section-label">What We Stand For</p>
+  <h2 class="section-title">Core Principles</h2>
+  <div class="values-grid">
+    <div class="value-card reveal"><span class="value-icon">🔺</span><div class="value-title" data-i18n="value_illumination">Illumination</div><div class="value-text" data-i18n="value_illumination_body">The relentless pursuit and protection of truth, wherever it leads — even when that truth is unwelcome to the established order.</div></div>
+    <div class="value-card reveal"><span class="value-icon">⚖️</span><div class="value-title" data-i18n="value_justice">Justice</div><div class="value-text" data-i18n="value_justice_body">True justice is not administered by courts — it operates through the invisible architecture of cause, consequence, and the long memory of the Brotherhood.</div></div>
+    <div class="value-card reveal"><span class="value-icon">🌐</span><div class="value-title" data-i18n="value_unity">Unity</div><div class="value-text" data-i18n="value_unity_body">Beyond all borders, races, and religions lies a common human potential. The Brotherhood exists to unlock that potential in the few, so the many may benefit.</div></div>
+    <div class="value-card reveal"><span class="value-icon">🔐</span><div class="value-title" data-i18n="value_discretion">Discretion</div><div class="value-text" data-i18n="value_discretion_body">The strength of the Brotherhood rests on absolute silence. What is known within the circle remains within the circle. Always.</div></div>
+    <div class="value-card reveal"><span class="value-icon">📡</span><div class="value-title" data-i18n="value_legacy">Legacy</div><div class="value-text" data-i18n="value_legacy_body">Every initiated member serves not their own lifetime, but the thousand years before and after it. The work is eternal. We are merely its custodians.</div></div>
+    <div class="value-card reveal"><span class="value-icon">✦</span><div class="value-title" data-i18n="value_excellence">Excellence</div><div class="value-text" data-i18n="value_excellence_body">Mediocrity is the enemy of enlightenment. Brotherhood members are expected to operate at the highest levels of their chosen disciplines — without exception.</div></div>
+  </div>
+</div>
+<div class="neon-divider"></div>
+
+<!-- LEADERSHIP -->
+<div class="about-section">
+  <p class="section-label" data-i18n="about_council_label">The Council</p>
+  <h2 class="section-title" data-i18n="about_council_title">Those Who Lead in Silence</h2>
+  <p style="max-width:600px;">The Brotherhood Council operates without public identity. These designations represent the functional roles of leadership — not the persons who hold them.</p>
+  <div class="leaders">
+    <div class="leader-card reveal"><div class="leader-avatar">👁️</div><div class="leader-title">The Grand Illuminator</div><div class="leader-rank">33rd Degree · Supreme Council</div><div class="leader-note">Keeper of the Brotherhood's highest secrets and final arbiter of initiations above the 18th degree.</div></div>
+    <div class="leader-card reveal"><div class="leader-avatar">🔺</div><div class="leader-title">The Architect</div><div class="leader-rank">30th Degree · Inner Council</div><div class="leader-note">Responsible for the Brotherhood's long-term strategy, alliances, and the placement of initiates in positions of influence.</div></div>
+    <div class="leader-card reveal"><div class="leader-avatar">⚖️</div><div class="leader-title">The Sentinel</div><div class="leader-rank">28th Degree · Inner Council</div><div class="leader-note">Guardian of Brotherhood law, protocol, and the security of all internal communications and records.</div></div>
+    <div class="leader-card reveal"><div class="leader-avatar">📜</div><div class="leader-title">The Archivist</div><div class="leader-rank">25th Degree · Scholars' Circle</div><div class="leader-note">Curator of the Brotherhood's complete historical record, sacred texts, and the encrypted Codex Illuminatus.</div></div>
+  </div>
+</div>
+
+<div class="about-quote">
+  <div class="reveal">
+        <blockquote data-i18n="about_quote">"We did not choose the light. The light chose us. Our only obligation is to carry it — faithfully, silently, and without rest."</blockquote>
+        <cite data-i18n="about_quote_attr">— The Grand Illuminator, Codex Illuminatus, Vol. I</cite>
+
+<div class="neon-divider"></div>
+<footer style="position:relative;z-index:2;padding:50px;text-align:center;">
+  <div style="font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--gold-dark);letter-spacing:6px;">The Brotherhood</div>
+  <p style="font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:4px;color:rgba(255,255,255,.2);margin-top:10px;">ORDO AB CHAO · LUX ET VERITAS · ANNO LUCIS VI</p>
+</footer>
+
+<script>
+function toggleMenu(){const b=document.getElementById('menuToggle'),o=document.getElementById('menuOverlay');if(b&&o){b.classList.toggle('open');o.classList.toggle('open');document.body.style.overflow=o.classList.contains('open')?'hidden':'';}}
+document.addEventListener('mousemove',e=>{const g=document.getElementById('cursor-glow');g.style.left=e.clientX+'px';g.style.top=e.clientY+'px';});
+const c=document.getElementById('particle-canvas'); if (c) { c.style.display = 'none'; }
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}}),{threshold:.12});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach((el,i)=>{el.style.transitionDelay=`${(i%4)*.1}s`;obs.observe(el);});
+</script>
+<script src="https://cdn.chatway.app/widget.js?id=SR6UPRBjVVcC" async></script>
+<a class="whatsapp-float" href="#" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp" title="Chat with us on WhatsApp">
+  <img src="whatsapp%20icon.jpg" alt="WhatsApp">
+</a>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brotherhood Admin Dashboard</title>
+  <meta name="description" content="Brotherhood admin dashboard for managing products, orders, contacts, and applications." />
+  <link rel="stylesheet" href="style.css" />
+  <script src="admin-dashboard.js" defer></script>
+  <style>
+    body { background:#060505; color:#eee; }
+    .admin-shell { max-width:1200px; margin:0 auto; padding:40px 24px; }
+    .admin-header { display:flex; flex-wrap:wrap; justify-content:space-between; gap:16px; align-items:flex-end; margin-bottom:34px; }
+    .admin-header h1 { margin:0; font-family:'Cinzel Decorative',serif; font-size:2.8rem; letter-spacing:1px; }
+    .admin-card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; margin-bottom:32px; }
+    .admin-card { border:1px solid rgba(255,255,255,.12); background:rgba(12,10,8,.92); padding:24px; border-radius:22px; }
+    .admin-card h2 { margin:0 0 10px; font-family:'Cinzel',serif; text-transform:uppercase; font-size:.75rem; letter-spacing:3px; color:rgba(255,255,255,.65); }
+    .admin-card p { margin:0; font-size:2.2rem; font-family:'Cinzel Decorative',serif; color:#fff; }
+    .admin-section { margin-bottom:40px; }
+    .admin-section-header { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:16px; }
+    .admin-section h3 { margin-bottom:18px; font-size:1.2rem; font-family:'Cinzel Decorative',serif; }
+    .admin-table { width:100%; border-collapse:collapse; font-family:'Raleway',sans-serif; font-size:.88rem; }
+    .admin-table th, .admin-table td { padding:12px 14px; border:1px solid rgba(255,255,255,.08); }
+    .admin-table th { text-align:left; background:rgba(255,255,255,.04); color:rgba(255,255,255,.75); }
+    .admin-table tbody tr:hover { background:rgba(255,255,255,.03); }
+    .admin-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:12px; }
+    .admin-actions button { padding:12px 18px; border:1px solid rgba(255,255,255,.18); border-radius:999px; background:transparent; color:#fff; cursor:pointer; }
+    .admin-actions button:hover { background:rgba(255,255,255,.08); }
+    .admin-modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.78); display:flex; align-items:center; justify-content:center; z-index:1100; }
+    .admin-modal { width:min(720px,95vw); max-height:90vh; overflow:auto; background:rgba(10,8,6,.98); border:1px solid rgba(255,255,255,.14); border-radius:28px; padding:28px; box-shadow:0 30px 80px rgba(0,0,0,.45); }
+    .admin-modal h3 { margin-top:0; font-size:1.3rem; }
+    .admin-modal form { display:grid; gap:16px; }
+    .admin-modal label { display:block; margin-bottom:6px; font-family:'Cinzel',serif; font-size:.75rem; letter-spacing:2px; color:rgba(255,255,255,.75); text-transform:uppercase; }
+    .admin-modal input, .admin-modal textarea, .admin-modal select { width:100%; padding:12px 14px; border:1px solid rgba(255,255,255,.14); border-radius:14px; background:rgba(255,255,255,.03); color:#fff; font-family:'Raleway',sans-serif; font-size:.95rem; }
+    .admin-modal textarea { min-height:120px; resize:vertical; }
+    .admin-modal-actions { display:flex; flex-wrap:wrap; gap:12px; justify-content:flex-end; margin-top:12px; }
+    .admin-modal button { padding:12px 16px; border:1px solid rgba(255,255,255,.18); border-radius:999px; background:transparent; color:#fff; cursor:pointer; }
+    .admin-modal button:hover { background:rgba(255,255,255,.08); }
+    .action-btn { border:none; background:transparent; color:#8fbaff; cursor:pointer; font-family:'Cinzel',serif; letter-spacing:1px; }
+    .action-btn:hover { text-decoration:underline; }
+    .hidden { display:none !important; }
+    .status-banner { margin-top:8px; color:rgba(180,180,180,.9); font-size:.95rem; }
+    @media(max-width:900px){ .admin-header{flex-direction:column;align-items:flex-start;} }
+  </style>
+</head>
+<body>
+  <div class="admin-shell">
+    <div class="admin-header">
+      <div>
+        <h1>Brotherhood Admin</h1>
+        <div id="adminSubtitle" class="status-banner">Secure dashboard for managing products, orders, and submissions.</div>
+      </div>
+      <div class="admin-actions" id="adminActions">
+        <button id="refreshButton">Refresh Data</button>
+        <button id="addProductButton">Add Product</button>
+        <button id="logoutButton">Logout</button>
+      </div>
+    </div>
+
+    <div id="dashboardPanel">
+      <div class="admin-card-grid">
+        <div class="admin-card"><h2>Total Products</h2><p id="statProducts">—</p></div>
+        <div class="admin-card"><h2>Total Orders</h2><p id="statOrders">—</p></div>
+        <div class="admin-card"><h2>Total Revenue</h2><p id="statRevenue">—</p></div>
+        <div class="admin-card"><h2>Low Stock</h2><p id="statLowStock">—</p></div>
+      </div>
+
+      <section class="admin-section">
+        <h3>Recent Orders</h3>
+        <table class="admin-table" id="ordersTable">
+          <thead><tr><th>Order Code</th><th>Name</th><th>Email</th><th>Total</th><th>Status</th><th>Date</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section class="admin-section">
+        <div class="admin-section-header">
+          <h3>Manage Products</h3>
+        </div>
+        <table class="admin-table" id="productsTable">
+          <thead><tr><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Sold</th><th>Status</th><th>Updated</th><th>Actions</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section class="admin-section">
+        <h3>Contact Messages</h3>
+        <table class="admin-table" id="contactsTable">
+          <thead><tr><th>Name</th><th>Email</th><th>Subject</th><th>Order Code</th><th>Date</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section class="admin-section">
+        <h3>Initiation Submissions</h3>
+        <table class="admin-table" id="initiationsTable">
+          <thead><tr><th>Name</th><th>Email</th><th>Statement</th><th>Date</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section class="admin-section">
+        <h3>Join Applications</h3>
+        <table class="admin-table" id="joinsTable">
+          <thead><tr><th>Name</th><th>Email</th><th>Country</th><th>Profession</th><th>Submitted</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </div>
+
+    <div id="productModalOverlay" class="admin-modal-overlay hidden" aria-hidden="true">
+      <div class="admin-modal" role="dialog" aria-modal="true" aria-labelledby="productModalTitle">
+        <h3 id="productModalTitle">Add New Product</h3>
+        <form id="productForm">
+          <input type="hidden" id="productId" />
+          <div>
+            <label for="productName">Product Name</label>
+            <input id="productName" type="text" required />
+          </div>
+          <div>
+            <label for="productCategory">Category</label>
+            <select id="productCategory" required>
+              <option value="ring">Ring</option>
+              <option value="pendant">Pendant</option>
+              <option value="medallion">Medallion</option>
+              <option value="accessory">Accessory</option>
+            </select>
+          </div>
+          <div>
+            <label for="productPrice">Price</label>
+            <input id="productPrice" type="number" min="0" step="1" required />
+          </div>
+          <div>
+            <label for="productStock">Stock</label>
+            <input id="productStock" type="number" min="0" step="1" required />
+          </div>
+          <div>
+            <label for="productSold">Sold</label>
+            <input id="productSold" type="number" min="0" step="1" required />
+          </div>
+          <div>
+            <label for="productImage">Image Path</label>
+            <input id="productImage" type="text" required />
+          </div>
+          <div>
+            <label for="productBadge">Badge</label>
+            <input id="productBadge" type="text" />
+          </div>
+          <div>
+            <label for="productDesc">Description</label>
+            <textarea id="productDesc" rows="3"></textarea>
+          </div>
+          <div>
+            <label for="productMaterial">Material</label>
+            <input id="productMaterial" type="text" />
+          </div>
+          <div>
+            <label for="productDelivery">Delivery</label>
+            <input id="productDelivery" type="text" />
+          </div>
+          <div class="admin-modal-actions">
+            <button type="button" id="cancelProductButton">Cancel</button>
+            <button type="submit">Save Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

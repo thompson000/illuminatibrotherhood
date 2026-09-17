@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brotherhood Admin Login</title>
+  <meta name="description" content="Brotherhood admin login page." />
+  <link rel="stylesheet" href="style.css" />
+  <script src="config.js" defer></script>
+  <script src="admin-login.js" defer></script>
+  <style>
+    body { background:#060505; color:#eee; display:flex; align-items:center; justify-content:center; min-height:100vh; margin:0; }
+    .login-panel { width:min(480px,95vw); padding:32px; border:1px solid rgba(255,255,255,.15); background:rgba(10,8,6,.95); border-radius:24px; }
+    .login-panel h3 { margin-top:0; font-family:'Cinzel Decorative',serif; font-size:2rem; }
+    .login-panel label { display:block; margin-bottom:8px; font-family:'Cinzel',serif; font-size:.75rem; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.7); }
+    .login-panel input { width:100%; margin-bottom:18px; padding:14px 16px; border:1px solid rgba(255,255,255,.14); border-radius:14px; background:rgba(255,255,255,.03); color:#fff; }
+    .login-panel button { width:100%; padding:14px 16px; border:1px solid rgba(255,255,255,.18); border-radius:999px; background:transparent; color:#fff; font-family:'Cinzel',serif; letter-spacing:2px; cursor:pointer; }
+    .login-panel button:hover { background:rgba(255,255,255,.08); }
+    .status-banner { margin-top:12px; color:#ff6961; font-size:.95rem; min-height:1.2em; }
+  </style>
+</head>
+<body>
+  <div class="login-panel">
+    <h3>Administrator Login</h3>
+    <form id="loginForm">
+      <label for="adminEmail">Email</label>
+      <input id="adminEmail" type="email" autocomplete="username" required />
+      <label for="adminPassword">Password</label>
+      <input id="adminPassword" type="password" autocomplete="current-password" required />
+      <button type="submit">Sign In</button>
+    </form>
+    <div id="loginError" class="status-banner"></div>
+  </div>
+</body>
+</html>

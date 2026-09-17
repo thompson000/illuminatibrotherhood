@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title data-i18n="page_title_help">Help & Support — The Brotherhood</title>
+<meta name="description" data-i18n="meta_description_help" content="Brotherhood help centre — orders, shipping, initiation inquiries, payment support and frequently asked questions."/>
+<link rel="stylesheet" href="style.css"/>
+<script src="i18n.js" defer></script>
+<script src="script.js" defer></script>
+<style>
+.help-hero{position:relative;padding:160px 60px 80px;text-align:center;background:radial-gradient(ellipse 60% 50% at 50% 30%,rgba(255,255,255,.04) 0%,transparent 70%);}
+.help-hero h1{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,5vw,3.5rem);color:var(--white);text-shadow:0 0 30px rgba(255,255,255,.2);margin-bottom:14px;}
+.help-hero p{font-family:'Raleway',sans-serif;color:rgba(255,255,255,.58);font-size:.95rem;letter-spacing:2px;max-width:600px;margin:0 auto;}
+.help-wrap{max-width:1100px;margin:0 auto;padding:80px 60px;position:relative;z-index:2;}
+/* SEARCH */
+.help-search{display:flex;gap:12px;margin-bottom:60px;max-width:600px;margin-left:auto;margin-right:auto;}
+.help-search input{flex:1;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.2);color:var(--white-soft);padding:14px 20px;font-family:'Raleway',sans-serif;font-size:.9rem;outline:none;transition:border-color .3s;}
+.help-search input::placeholder{color:rgba(255,255,255,.32);}
+.help-search input:focus{border-color:var(--white);}
+.help-search button{padding:14px 28px;border:1px solid var(--white);background:transparent;color:var(--white);font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:3px;cursor:pointer;transition:all .3s;text-transform:uppercase;}
+.help-search button:hover{background:var(--white);color:#000;}
+/* CATEGORIES */
+.help-cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:70px;}
+.help-cat{padding:28px 20px;border:1px solid rgba(255,255,255,.12);text-align:center;cursor:pointer;transition:all .4s;background:rgba(255,255,255,.02);}
+.help-cat:hover{border-color:var(--white);background:rgba(255,255,255,.06);transform:translateY(-4px);}
+.help-cat-icon{font-size:2rem;display:block;margin-bottom:10px;}
+.help-cat-title{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:3px;color:var(--white);text-transform:uppercase;}
+/* FAQ ACCORDION */
+.faq-section{margin-bottom:60px;}
+.faq-heading{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:5px;color:rgba(255,255,255,.5);text-transform:uppercase;margin-bottom:24px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.12);}
+.faq-item{border:1px solid rgba(255,255,255,.1);margin-bottom:8px;transition:border-color .3s;}
+.faq-item.open{border-color:rgba(255,255,255,.35);}
+.faq-q{padding:20px 24px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;}
+.faq-q-text{font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:2px;color:rgba(255,255,255,.8);}
+.faq-item.open .faq-q-text{color:var(--white);}
+.faq-arrow{font-size:.8rem;color:rgba(255,255,255,.5);transition:transform .3s;}
+.faq-item.open .faq-arrow{transform:rotate(180deg);color:var(--white);}
+.faq-a{display:none;padding:0 24px 20px;font-family:'Raleway',sans-serif;font-size:.85rem;line-height:1.8;color:rgba(255,255,255,.55);}
+.faq-item.open .faq-a{display:block;}
+/* CONTACT FORM */
+.contact-section{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.12);padding:48px;margin-bottom:60px;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+.cf-field{display:flex;flex-direction:column;gap:8px;}
+.cf-field label{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:3px;color:rgba(255,255,255,.5);text-transform:uppercase;}
+.cf-field input,.cf-field select,.cf-field textarea{background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.2);color:var(--white-soft);padding:12px 16px;font-family:'Raleway',sans-serif;font-size:.85rem;outline:none;transition:border-color .3s;width:100%;}
+.cf-field input:focus,.cf-field select:focus,.cf-field textarea:focus{border-color:var(--white);}
+.cf-field select option{background:#080602;}
+.cf-field textarea{resize:vertical;min-height:120px;}
+.cf-submit{padding:15px 40px;border:1px solid var(--white);background:transparent;color:var(--white);font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:4px;cursor:pointer;text-transform:uppercase;transition:all .4s;margin-top:8px;position:relative;overflow:hidden;}
+.cf-submit::before{content:'';position:absolute;inset:0;background:var(--white);transform:scaleX(0);transform-origin:left;transition:transform .4s;z-index:-1;}
+.cf-submit:hover{color:#000;}
+.cf-submit:hover::before{transform:scaleX(1);}
+.cf-success{display:none;text-align:center;padding:30px;font-family:'Cinzel Decorative',serif;color:var(--white);font-size:1.1rem;}
+/* STATUS TRACKER */
+.track-section{border:1px solid rgba(255,255,255,.15);padding:40px;margin-bottom:60px;}
+.track-row{display:flex;gap:12px;margin-bottom:16px;}
+.track-row input{flex:1;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.2);color:var(--white-soft);padding:12px 16px;font-family:'Raleway',sans-serif;font-size:.85rem;outline:none;transition:border-color .3s;}
+.track-row input:focus{border-color:var(--white);}
+.track-btn{padding:12px 28px;border:1px solid var(--white);background:transparent;color:var(--white);font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:3px;cursor:pointer;text-transform:uppercase;transition:all .3s;white-space:nowrap;}
+.track-btn:hover{background:var(--white);color:#000;}
+.track-result{display:none;padding:20px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.03);margin-top:14px;}
+.track-result.show{display:block;}
+.track-status-row{display:flex;align-items:center;gap:16px;margin-bottom:12px;}
+.track-dot{width:10px;height:10px;border-radius:50%;background:var(--white);box-shadow:0 0 10px rgba(255,255,255,.35);}
+.track-status-text{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:2px;color:var(--white);}
+.track-detail{font-family:'Raleway',sans-serif;font-size:.82rem;line-height:1.7;color:rgba(255,255,255,.5);}
+/* QUICK LINKS */
+.quick-links{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:60px;}
+.qlink{display:flex;align-items:center;gap:16px;padding:20px 24px;border:1px solid rgba(255,255,255,.1);text-decoration:none;transition:all .3s;}
+.qlink:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.03);transform:translateX(6px);}
+.qlink-icon{font-size:1.4rem;}
+.qlink-text{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:2px;color:rgba(255,255,255,.7);text-transform:uppercase;}
+.qlink:hover .qlink-text{color:var(--white);}
+@media(max-width:768px){.help-wrap{padding:60px 24px;}.contact-grid{grid-template-columns:1fr;}.help-cats{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+<div id="cursor-glow"></div>
+<canvas id="particle-canvas"></canvas>
+<div class="fog-layer"></div>
+
+<nav>
+  <div class="nav-logo">☽ ILLUMINATI ☾</div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="index.html" data-i18n="nav_sanctum">Home</a></li>
+      <li><a href="shop.html" data-i18n="nav_shop">Shop</a></li>
+      <li><a href="about.html" data-i18n="nav_about">About</a></li>
+      <li><a class="active" href="help.html" data-i18n="nav_help">Help</a></li>
+    </ul>
+    <div class="language-switcher">
+      <button id="languageToggle" class="language-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="languageMenu">
+        <span id="languageLabel">🇬🇧 English</span>
+        <span aria-hidden="true">▾</span>
+      </button>
+      <div id="languageMenu" class="language-menu" role="listbox" aria-label="Language selector"></div>
+    </div>
+  </div>
+  <button class="nav-hamburger" id="menuToggle" onclick="toggleMenu()">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+</nav>
+
+<div class="menu-overlay" id="menuOverlay">
+  <ul class="menu-overlay-links">
+    <li><a href="index.html" onclick="toggleMenu()" data-i18n="nav_sanctum">Sanctum</a></li>
+    <li><a href="shop.html" onclick="toggleMenu()" data-i18n="nav_shop">Shop</a></li>
+    <li><a href="about.html" onclick="toggleMenu()" data-i18n="nav_about">About</a></li>
+    <li><a href="help.html" onclick="toggleMenu()" data-i18n="nav_help">Help</a></li>
+</div>
+
+<div class="help-hero">
+  <p class="section-label" style="margin-bottom:14px;" data-i18n="help_hero_label">Brotherhood Support</p>
+  <h1 data-i18n="help_hero_title">How May We Assist?</h1>
+  <p data-i18n="help_hero_body">The Brotherhood watches over all initiates. Whatever your inquiry, discretion and resolution are guaranteed.</p>
+</div>
+<div class="neon-divider"></div>
+
+<div class="help-wrap">
+
+  <!-- SEARCH -->
+  <div class="help-search reveal">
+    <input type="text" id="searchInput" placeholder="Search your question..." data-i18n-placeholder="help_search_placeholder" oninput="searchFAQ()"/>
+    <button onclick="searchFAQ()" data-i18n="help_search_button">Search</button>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="help-cats">
+      <div class="help-cat reveal" onclick="scrollTo('#orders')"><span class="help-cat-icon">📦</span><div class="help-cat-title" data-i18n="help_category_orders">Orders & Delivery</div></div>
+      <div class="help-cat reveal" onclick="scrollTo('#payment')"><span class="help-cat-icon">₿</span><div class="help-cat-title" data-i18n="help_category_payments">Payments</div></div>
+      <div class="help-cat reveal" onclick="scrollTo('#initiation')"><span class="help-cat-icon">🔺</span><div class="help-cat-title" data-i18n="help_category_initiation">Initiation</div></div>
+      <div class="help-cat reveal" onclick="scrollTo('#artifacts')"><span class="help-cat-icon">💍</span><div class="help-cat-title" data-i18n="help_category_artifacts">Artifacts</div></div>
+      <div class="help-cat reveal" onclick="scrollTo('#security')"><span class="help-cat-icon">🔐</span><div class="help-cat-title" data-i18n="help_category_security">Security</div></div>
+      <div class="help-cat reveal" onclick="scrollTo('#contact-section')"><span class="help-cat-icon">✉️</span><div class="help-cat-title" data-i18n="help_category_contact">Contact Us</div></div>
+
+  <!-- ORDER TRACKING -->
+  <div class="track-section reveal">
+    <p class="section-label" style="margin-bottom:8px;" data-i18n="help_courier_label">Courier Status</p>
+    <h3 class="section-title" style="font-size:1.3rem;margin-bottom:20px;" data-i18n="help_courier_title">Track Your Order</h3>
+    <div class="track-row">
+      <input type="text" id="trackInput" placeholder="Enter your Brotherhood Order Code (e.g. BRH-2024-XXXX)" data-i18n-placeholder="help_track_input_placeholder"/>
+      <button class="track-btn" onclick="trackOrder()" data-i18n="help_track_button">Track</button>
+    </div>
+    <div id="trackResult" class="track-result">
+      <div class="track-status-row">
+        <div class="track-dot"></div>
+          <div class="track-status-text" data-i18n="help_track_status">IN TRANSIT — ENCRYPTED COURIER</div>
+        </div>
+        <div class="track-detail" data-i18n-html="help_track_detail">Your artifact has been dispatched from our secure vault and is currently in transit via our encrypted courier network. Estimated arrival: <strong style="color:rgba(255,255,255,.9);">7-14 days</strong>. You will receive a Brotherhood-encrypted notification upon delivery. No tracking number is shared publicly for security reasons.</div>
+  </div>
+
+  <!-- FAQ: PAYMENT -->
+  <div class="faq-section reveal" id="payment">
+    <div class="faq-heading">₿ Payments & Crypto</div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)"><span class="faq-q-text">Why does the Brotherhood accept Bitcoin?</span><span class="faq-arrow">▾</span></div><div class="faq-a">The Brotherhood values absolute discretion in all transactions. Bitcoin and other cryptocurrencies allow initiates to acquire sacred artifacts without creating a traceable financial record. This protects both buyer and Brotherhood alike. Crypto payments are confirmed after 1–3 blockchain confirmations.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)"><span class="faq-q-text">Which cryptocurrencies are accepted?</span><span class="faq-arrow">▾</span></div><div class="faq-a">We accept Bitcoin (BTC), Ethereum (ETH), and USDT (TRC-20 network). Crypto payments are processed at the exchange rate at time of order. You will receive a Brotherhood wallet address valid for 60 minutes per order to ensure accurate conversion rates.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)"><span class="faq-q-text">Is PayPal or card payment safe?</span><span class="faq-arrow">▾</span></div><div class="faq-a">Yes. Card and PayPal transactions are processed through our encrypted payment gateway using 256-bit SSL encryption. For maximum discretion, we recommend cryptocurrency. Card payments may appear on statements under a neutral merchant name unrelated to the Brotherhood.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)"><span class="faq-q-text">What if my crypto payment hasn't confirmed?</span><span class="faq-arrow">▾</span></div><div class="faq-a">Blockchain confirmation typically takes 10–60 minutes depending on network congestion. If your transaction has not confirmed after 2 hours, contact support with your transaction hash. Do not resend — duplicate payments will be returned minus network fees.</div></div>
+  </div>
+
+  <!-- FAQ: INITIATION -->
+  <div class="faq-section reveal" id="initiation">
+    <div class="faq-heading">🔺 Initiation & Membership</div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)"><span class="faq-q-text">How does Brotherhood initiation work?</span><span class="faq-arrow">▾</span></div><div class="faq-a">Initiation is not applied for — it is extended by invitation. The Brotherhood observes individuals of exceptional intellect, character, and discipline over time. If you are deemed ready, you will be contacted through channels you will recognise. Purchasing artifacts is one way to demonstrate your seriousness and alignment with Brotherhood values.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)"><span class="faq-q-text">Can I request membership directly?</span><span class="faq-arrow">▾</span></div><div class="faq-a">You may submit an expression of interest via our contact form below. Include your background, why you seek illumination, and what you offer to the Brotherhood. All submissions are reviewed by the Council. Most receive no response — not from rejection, but because the decision is not yet made. Patience is itself a test.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)"><span class="faq-q-text">What degrees of membership exist?</span><span class="faq-arrow">▾</span></div><div class="faq-a">The Brotherhood operates on a 33-degree system of initiation. Initiates begin at the 1st degree (Entered Apprentice) and progress through demonstrated mastery of each level's teachings. The highest 3 degrees (31st–33rd) are invitation-only and their knowledge is never written. Progression is entirely merit-based.</div></div>
+  </div>
+
+  <!-- FAQ: ARTIFACTS -->
+  <div class="faq-section reveal" id="artifacts">
+    <div class="faq-heading">💍 Artifacts & Items</div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)"><span class="faq-q-text">Are Brotherhood artifacts genuinely sacred?</span><span class="faq-arrow">▾</span></div><div class="faq-a">Brotherhood artifacts are crafted by master artisans working under specific astronomical and ceremonial conditions. Crystals and metals are selected from verified sources of ancient provenance. Rings are engraved with the buyer's initiate cipher after consecration. Whether you believe in their metaphysical properties is secondary — their craftsmanship and rarity are objectively unmatched.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)"><span class="faq-q-text">What materials are used in Brotherhood rings?</span><span class="faq-arrow">▾</span></div><div class="faq-a">Standard Brotherhood rings are crafted from 18k gold with inlay options including obsidian, onyx, ruby, and sapphire. The Grand Master ring uses black gold — a rare alloy used exclusively by top-tier jewelers. All rings arrive with a Brotherhood material certification sealed in wax.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)"><span class="faq-q-text">How does the Charisma Amulet work?</span><span class="faq-arrow">▾</span></div><div class="faq-a">The Charisma Amulet functions through a combination of symbolic anchoring (a psychological principle proven in behavioural science) and the rare copper-mineral matrix it is composed of. Brotherhood wearers report measurable improvements in social confidence, persuasive authority, and interpersonal magnetism. Wear it close to the sternum for optimal effect.</div></div>
+  </div>
+
+  <!-- FAQ: SECURITY -->
+  <div class="faq-section reveal" id="security">
+    <div class="faq-heading">🔐 Security & Privacy</div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)"><span class="faq-q-text">Is my personal data kept private?</span><span class="faq-arrow">▾</span></div><div class="faq-a">The Brotherhood does not maintain customer databases in any publicly accessible system. Your delivery address is encrypted, used once, and purged from our records after courier handoff. We do not sell, share, or monetise any initiate information under any circumstances.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)"><span class="faq-q-text">How do I know this site is legitimate?</span><span class="faq-arrow">▾</span></div><div class="faq-a">The Brotherhood has no need for external validation. Our legitimacy is demonstrated through the centuries — not through certificates or reviews. That said: our artifacts are physical goods, our couriers are real, and our craftsmen are verifiable. First-time buyers may request a sample correspondence via encrypted email before purchase.</div></div>
+  </div>
+
+  <!-- CONTACT FORM -->
+  <div class="contact-section reveal" id="contact-section">
+    <p class="section-label" style="margin-bottom:8px;" data-i18n="help_contact_label">Direct Communication</p>
+    <h3 class="section-title" style="font-size:1.4rem;margin-bottom:24px;" data-i18n="help_contact_title">Contact the Brotherhood</h3>
+    <div id="contactForm">
+      <div class="contact-grid">
+        <div class="cf-field"><label data-i18n="help_name_label">Your Name (or Alias)</label><input id="contactName" type="text" placeholder="Name or Brotherhood alias" data-i18n-placeholder="help_name_placeholder"/></div>
+        <div class="cf-field"><label data-i18n="help_email_label">Encrypted Email</label><input id="contactEmail" type="email" placeholder="your@email.com" data-i18n-placeholder="help_email_placeholder"/></div>
+      </div>
+      <div class="contact-grid">
+        <div class="cf-field"><label data-i18n="help_subject_label">Subject</label>
+          <select id="contactSubject"><option value="">— Select —</option><option>Order Inquiry</option><option>Payment Issue</option><option>Membership Interest</option><option>Artifact Inquiry</option><option>General Question</option><option>Other</option></select>
+        </div>
+        <div class="cf-field"><label data-i18n="help_order_label">Order Code (if applicable)</label><input id="contactOrderCode" type="text" placeholder="BRH-XXXX-XXXX" data-i18n-placeholder="help_order_placeholder"/></div>
+      </div>
+      <div class="cf-field" style="margin-bottom:16px;"><label data-i18n="help_message_label">Your Message</label><textarea id="contactMessage" placeholder="Speak freely. All communications are encrypted and reviewed only by Brotherhood officers." data-i18n-placeholder="help_message_placeholder"></textarea></div>
+      <p style="font-family:'Raleway',sans-serif;font-size:.78rem;color:rgba(240,208,128,.35);margin-bottom:16px;" data-i18n="help_response_note">Response time: 24–72 hours via encrypted Brotherhood channel. Not all inquiries receive a response — the Council determines relevance.</p>
+      <button class="cf-submit" onclick="submitContact()" data-i18n="help_submit_button">⬡ Submit to the Council</button>
+    </div>
+    <div class="cf-success" id="cfSuccess" data-i18n="help_success">👁️ &nbsp; Your message has been received. The Eye watches.<br/><span style="font-family:'Raleway',sans-serif;font-size:.82rem;color:rgba(240,208,128,.4);">A Brotherhood officer will respond within 24–72 hours if warranted.</span></div>
+  </div>
+
+  <!-- QUICK LINKS -->
+  <div class="reveal">
+    <p class="section-label" data-i18n="help_nav_label">Navigate</p>
+    <h3 class="section-title" style="font-size:1.3rem;" data-i18n="help_quick_links_title">Quick Links</h3>
+    <div class="quick-links">
+      <a href="shop.html" class="qlink"><span class="qlink-icon">💍</span><span class="qlink-text" data-i18n="help_quick_link_browse">Browse Sacred Artifacts</span></a>
+      <a href="about.html" class="qlink"><span class="qlink-icon">🔺</span><span class="qlink-text" data-i18n="help_quick_link_about">About the Brotherhood</span></a>
+      <a href="index.html" class="qlink"><span class="qlink-icon">👁️</span><span class="qlink-text" data-i18n="help_quick_link_return">Return to Sanctum</span></a>
+      <a href="#contact-section" class="qlink"><span class="qlink-icon">✉️</span><span class="qlink-text" data-i18n="help_quick_link_contact">Contact the Council</span></a>
+    </div>
+  </div>
+</div>
+
+<div class="neon-divider"></div>
+<footer style="position:relative;z-index:2;padding:50px;text-align:center;">
+  <div style="font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--gold-dark);letter-spacing:6px;">The Brotherhood</div>
+  <p style="font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:4px;color:rgba(255,255,255,.2);margin-top:10px;">ALL INQUIRIES ENCRYPTED · THE EYE WATCHES ALWAYS · ORDO AB CHAO</p>
+</footer>
+
+<script>
+document.addEventListener('mousemove',e=>{const g=document.getElementById('cursor-glow');g.style.left=e.clientX+'px';g.style.top=e.clientY+'px';});
+const c=document.getElementById('particle-canvas'); if (c) { c.style.display = 'none'; }
+
+function toggleFAQ(el){const item=el.parentElement;const wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!wasOpen)item.classList.add('open');}
+
+function trackOrder(){const v=document.getElementById('trackInput').value.trim();const r=document.getElementById('trackResult');if(v.length>3){r.classList.add('show');}else{alert(i18n.t('help_track_invalid'));}}
+
+async function submitContact() {
+  const payload = {
+    name: document.getElementById('contactName').value.trim(),
+    email: document.getElementById('contactEmail').value.trim(),
+    subject: document.getElementById('contactSubject').value,
+    order_code: document.getElementById('contactOrderCode').value.trim(),
+    message: document.getElementById('contactMessage').value.trim()
+  };
+
+  if (!payload.name || !payload.email || !payload.subject || !payload.message) {
+    return alert(i18n.t('help_contact_error_required'));
+  }
+
+  try {
+    const res = await fetch(window.buildApiUrl ? window.buildApiUrl('/api/help/contact') : '/api/help/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!res.ok || !data.success) throw new Error('Submission failed');
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('cfSuccess').style.display = 'block';
+  } catch (err) {
+    alert(i18n.t('help_contact_error_failed'));
+  }
+}
+
+function searchFAQ(){const q=document.getElementById('searchInput').value.toLowerCase();document.querySelectorAll('.faq-item').forEach(item=>{const text=item.querySelector('.faq-q-text').textContent.toLowerCase()+item.querySelector('.faq-a').textContent.toLowerCase();item.style.display=(!q||text.includes(q))?'block':'none';});}
+
+function scrollTo(id){document.querySelector(id).scrollIntoView({behavior:'smooth'});}
+
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.1});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach((el,i)=>{el.style.transitionDelay=`${(i%4)*.08}s`;obs.observe(el);});
+</script>
+<script src="https://cdn.chatway.app/widget.js?id=SR6UPRBjVVcC" async></script>
+<a class="whatsapp-float" href="#" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp" title="Chat with us on WhatsApp">
+  <img src="whatsapp%20icon.jpg" alt="WhatsApp">
+</a>
+</body>
+</html>
