@@ -25,6 +25,7 @@ const PAYMENT_DB_NAME = process.env.PAYMENT_DB_NAME || 'paymentcard';
 const JOIN_DB_NAME = process.env.JOIN_DB_NAME || 'Joinform';
 const INITIATION_DB_NAME = process.env.INITIATION_DB_NAME || 'InitiatiionForm';
 const SESSION_SECRET = process.env.SESSION_SECRET || 'replace-me-with-a-secure-secret';
+const ADMIN_SESSION_MAX_AGE_MS = 1000 * 60 * 30;
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 const DEFAULT_WHATSAPP_NUMBER = process.env.WHATSAPP_NUMBER || '1953320585';
@@ -67,7 +68,7 @@ app.use(
     saveUninitialized: false,
     store: sessionStore,
     cookie: {
-      maxAge: 1000 * 60 * 60 * 4,
+      maxAge: ADMIN_SESSION_MAX_AGE_MS,
       httpOnly: true,
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       secure: process.env.NODE_ENV === 'production',
