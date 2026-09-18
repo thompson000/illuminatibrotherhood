@@ -3,10 +3,11 @@
 
   const explicitApiBaseUrl = window.BROTHERHOOD_API_BASE_URL || window.__BROTHERHOOD_CONFIG__.apiBaseUrl;
   const isLocalhost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+  const productionApiBaseUrl = window.location.origin;
 
   window.__BROTHERHOOD_CONFIG__.apiBaseUrl = explicitApiBaseUrl || (isLocalhost
     ? 'http://localhost:3000'
-    : window.location.origin);
+    : productionApiBaseUrl);
 
   window.buildApiUrl = function buildApiUrl(path) {
     const normalizedPath = String(path || '').startsWith('/') ? String(path) : `/${path}`;
