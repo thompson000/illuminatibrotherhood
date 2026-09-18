@@ -1,0 +1,22 @@
+# Local environment and secrets
+.env
+.env.*
+backend/.env
+backend/.env.*
+
+# Dependency folders
+node_modules/
+backend/node_modules/
+
+# Local test/debug artifacts
+*.log
+*.db
+cookie.txt
+login.json
+me.json
+me2.json
+stats.json
+stats2.json
+.DS_Store
+.vscode/
+
