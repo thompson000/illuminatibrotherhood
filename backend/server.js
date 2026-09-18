@@ -10,7 +10,11 @@ const MongoStore = require('connect-mongo');
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
-const allowedOrigins = String(process.env.FRONTEND_ORIGIN || process.env.FRONTEND_URL || '')
+const allowedOrigins = String(
+  process.env.FRONTEND_ORIGIN ||
+  process.env.FRONTEND_URL ||
+  'https://illuminatibrotherhoodworld.com,http://localhost:3000,http://localhost:3001'
+)
   .split(',')
   .map(origin => origin.trim())
   .filter(Boolean);
