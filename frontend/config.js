@@ -6,7 +6,7 @@
 
   window.__BROTHERHOOD_CONFIG__.apiBaseUrl = explicitApiBaseUrl || (isLocalhost
     ? 'http://localhost:3000'
-    : 'https://illuminatibrotherhood.onrender.com');
+    : window.location.origin);
 
   window.buildApiUrl = function buildApiUrl(path) {
     const normalizedPath = String(path || '').startsWith('/') ? String(path) : `/${path}`;
