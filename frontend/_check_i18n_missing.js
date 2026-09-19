@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const htmlFiles = ['frontend/help.html','frontend/join.html','frontend/shop.html'];
+const htmlFiles = ['frontend/faq.html','frontend/join.html','frontend/shop.html'];
 const i18nFile = 'frontend/i18n.js';
 const htmlText = htmlFiles.map(f => fs.readFileSync(path.resolve(f), 'utf8'));
 const keyRegex = /data-i18n(?:-placeholder|-html|-value|-title|-alt|-aria)?="([^"]+)"/g;

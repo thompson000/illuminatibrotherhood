@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title data-i18n="page_title_faq">FAQ — The Brotherhood</title>
+<meta name="description" data-i18n="meta_description_faq" content="Frequently asked questions about the Brotherhood, its artifacts, support, and initiation."/>
+<link rel="stylesheet" href="style.css"/>
+<script src="i18n.js" defer></script>
+<script src="script.js" defer></script>
+<style>
+.faq-hero{position:relative;padding:160px 60px 80px;text-align:center;background:radial-gradient(ellipse 60% 50% at 50% 30%,rgba(255,255,255,.04) 0%,transparent 70%);}
+.faq-hero h1{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,5vw,3.5rem);color:var(--white);text-shadow:0 0 30px rgba(255,255,255,.2);margin-bottom:14px;}
+.faq-hero p{font-family:'Raleway',sans-serif;color:rgba(255,255,255,.58);font-size:.95rem;letter-spacing:2px;max-width:600px;margin:0 auto;}
+.faq-wrap{max-width:900px;margin:0 auto;padding:80px 60px;position:relative;z-index:2;}
+.faq-section{margin-bottom:60px;}
+.faq-heading{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:5px;color:rgba(255,255,255,.5);text-transform:uppercase;margin-bottom:24px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.12);}
+.faq-item{border:1px solid rgba(255,255,255,.1);margin-bottom:8px;transition:border-color .3s;}
+.faq-item.open{border-color:rgba(255,255,255,.35);}
+.faq-toggle{width:100%;padding:20px 24px;border:0;background:transparent;text-align:left;font:inherit;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;}
+.faq-toggle:focus-visible{outline:2px solid var(--white);outline-offset:-2px;}
+.faq-q-text{font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:2px;color:rgba(255,255,255,.8);}
+.faq-item.open .faq-q-text{color:var(--white);}
+.faq-arrow{font-size:1.1rem;color:rgba(255,255,255,.5);transition:transform .3s;color:var(--white);}
+.faq-item.open .faq-arrow{transform:rotate(45deg);}
+.faq-a{padding:0 24px 20px;font-family:'Raleway',sans-serif;font-size:.85rem;line-height:1.8;color:rgba(255,255,255,.55);}
+.faq-a[hidden]{display:none;}
+@media(max-width:768px){.faq-wrap{padding:60px 24px;}.faq-toggle{padding:18px 16px;}.faq-q-text{font-size:.7rem;letter-spacing:1.4px;}.faq-a{padding:0 16px 18px;font-size:.82rem;}}
+</style>
+</head>
+<body>
+<div id="cursor-glow"></div>
+<canvas id="particle-canvas"></canvas>
+<div class="fog-layer"></div>
+
+<nav>
+  <div class="nav-logo">☽ ILLUMINATI ☾</div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="index.html" data-i18n="nav_sanctum">Sanctum</a></li>
+      <li><a href="shop.html" data-i18n="nav_shop">Shop</a></li>
+      <li><a href="about.html" data-i18n="nav_about">About</a></li>
+      <li><a class="active" href="faq.html" data-i18n="nav_faq">FAQ</a></li>
+      <li><a href="join.html" data-i18n="nav_join">Join Us</a></li>
+    </ul>
+    <div class="language-switcher">
+      <button id="languageToggle" class="language-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="languageMenu">
+        <span id="languageLabel">🇬🇧 English</span>
+        <span aria-hidden="true">▾</span>
+      </button>
+      <div id="languageMenu" class="language-menu" role="listbox" aria-label="Language selector"></div>
+    </div>
+  </div>
+  <button class="nav-hamburger" id="menuToggle" onclick="toggleMenu()">
+    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+  </button>
+</nav>
+
+<div class="menu-overlay" id="menuOverlay">
+  <ul class="menu-overlay-links">
+    <li><a href="index.html" onclick="toggleMenu()" data-i18n="nav_sanctum">Sanctum</a></li>
+    <li><a href="shop.html" onclick="toggleMenu()" data-i18n="nav_shop">Shop</a></li>
+    <li><a href="about.html" onclick="toggleMenu()" data-i18n="nav_about">About</a></li>
+    <li><a href="faq.html" onclick="toggleMenu()" data-i18n="nav_faq">FAQ</a></li>
+    <li><a href="join.html" onclick="toggleMenu()" data-i18n="nav_join">Join Us</a></li>
+  </ul>
+</div>
+
+<div class="faq-hero">
+  <p class="section-label" style="margin-bottom:14px;" data-i18n="help_hero_label">Brotherhood Support</p>
+  <h1 data-i18n="help_faq_heading">Frequently Asked Questions</h1>
+  <p data-i18n="help_hero_body">The Brotherhood watches over all initiates. Whatever your inquiry, discretion and resolution are guaranteed.</p>
+</div>
+<div class="neon-divider"></div>
+
+<main class="faq-wrap">
+  <section class="faq-section reveal" aria-labelledby="faq-heading">
+    <h2 class="faq-heading" id="faq-heading" data-i18n="help_faq_heading">Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-services" onclick="toggleFAQ(this)">
+        <span class="faq-q-text" data-i18n="help_faq_services_question">What is the illuminati society?</span><span class="faq-arrow" aria-hidden="true">+</span>
+      </button>
+      <div class="faq-a" id="faq-services" hidden data-i18n="help_faq_services_answer">The Illuminati Society is a global order that unites influential people from every background — every country, religion, race, age, income, education and opinion — in the pursuit of prosperity and human advancement. Our stated goal is to change the world for the better, and our work has been marked through history by a set of distinct symbols.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-process" onclick="toggleFAQ(this)">
+        <span class="faq-q-text" data-i18n="help_faq_process_question">Do I have to change my Religion?</span><span class="faq-arrow" aria-hidden="true">+</span>
+      </button>
+      <div class="faq-a" id="faq-process" hidden data-i18n="help_faq_process_answer">No, you do not have to change your religion to join the Illuminati Society.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-start" onclick="toggleFAQ(this)">
+        <span class="faq-q-text" data-i18n="help_faq_start_question">Is the illuminati society real??</span><span class="faq-arrow" aria-hidden="true">+</span>
+      </button>
+      <div class="faq-a" id="faq-start" hidden data-i18n="help_faq_start_answer">Yes. The Society operates openly through this website, publishes its principles, its symbols and its membership pathway, and can be contacted directly at the contacts page Much of what circulates about the Illuminati is myth spread by people with something to sell; the pages on this site are the Society speaking for itself..</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-contact" onclick="toggleFAQ(this)">
+        <span class="faq-q-text" data-i18n="help_faq_contact_question">How can I contact you?</span><span class="faq-arrow" aria-hidden="true">+</span>
+      </button>
+      <div class="faq-a" id="faq-contact" hidden data-i18n="help_faq_contact_answer">Use the Contact the Brotherhood form below and include enough detail for the Council to route your request correctly.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-response" onclick="toggleFAQ(this)">
+        <span class="faq-q-text" data-i18n="help_faq_response_question">Where is the Illuminati Society based?</span><span class="faq-arrow" aria-hidden="true">+</span>
+      </button>
+      <div class="faq-a" id="faq-response" hidden data-i18n="help_faq_response_answer">The first headquarters is in Germany, where the Society was founded. In 1996 the Supreme Council established a second headquarters in the United States to streamline global operations; it is based in Los Angeles and handles global membership recruitment and transitions.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-mobile" onclick="toggleFAQ(this)">
+        <span class="faq-q-text" data-i18n="help_faq_mobile_question">Where can I join the illuminati society?</span><span class="faq-arrow" aria-hidden="true">+</span>
+      </button>
+      <div class="faq-a" id="faq-mobile" hidden data-i18n="help_faq_mobile_answer">Membership is open to eligible people from any country, religion, race, age, income, education and opinion. A prospective member must be an eligible man or woman of at least 16 years of age, of good character, integrity and reputation; must apply of their own free will and accord, with no one compelling them; must believe in the existence of a Supreme Being; must be a peaceful citizen not engaged in subversive activities; and must be a citizen or permanent resident of an eligible country.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-security" onclick="toggleFAQ(this)">
+        <span class="faq-q-text" data-i18n="help_faq_security_question">Is my information secure?</span><span class="faq-arrow" aria-hidden="true">+</span>
+      </button>
+      <div class="faq-a" id="faq-security" hidden data-i18n="help_faq_security_answer">We use protected communication and handle requests only through the systems required to provide the requested service.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-support" onclick="toggleFAQ(this)">
+        <span class="faq-q-text" data-i18n="help_faq_support_question">Do you offer support?</span><span class="faq-arrow" aria-hidden="true">+</span>
+      </button>
+      <div class="faq-a" id="faq-support" hidden data-i18n="help_faq_support_answer">Yes. Use the live chat for assistance with general questions and requests.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-change" onclick="toggleFAQ(this)">
+        <span class="faq-q-text" data-i18n="help_faq_change_question">Do I need to be wealthy, famous or well connected?</span><span class="faq-arrow" aria-hidden="true">+</span>
+      </button>
+      <div class="faq-a" id="faq-change" hidden data-i18n="help_faq_change_answer">No, the Illuminati Society values individuals based on their potential and alignment with the organization's principles, rather than their wealth or social status.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-more" onclick="toggleFAQ(this)">
+        <span class="faq-q-text" data-i18n="help_faq_more_question">Where can I find more information?</span><span class="faq-arrow" aria-hidden="true">+</span>
+      </button>
+      <div class="faq-a" id="faq-more" hidden data-i18n="help_faq_more_answer">Use the navigation above to visit the Sanctum, About, Shop, Join, and FAQ pages.</div>
+    </div>
+  </section>
+</main>
+
+<div class="neon-divider"></div>
+<footer style="position:relative;z-index:2;padding:50px;text-align:center;">
+  <div style="font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--gold-dark);letter-spacing:6px;">The Brotherhood</div>
+  <p style="font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:4px;color:rgba(255,255,255,.2);margin-top:10px;">ALL INQUIRIES ENCRYPTED · THE EYE WATCHES ALWAYS · ORDO AB CHAO</p>
+</footer>
+
+<script>
+function toggleFAQ(button) {
+  const item = button.closest('.faq-item');
+  const answer = item?.querySelector('.faq-a');
+  if (!item || !answer) return;
+  const expanded = button.getAttribute('aria-expanded') === 'true';
+  document.querySelectorAll('.faq-item').forEach(other => {
+    other.classList.remove('open');
+    const otherButton = other.querySelector('.faq-toggle');
+    const otherAnswer = other.querySelector('.faq-a');
+    if (otherButton) otherButton.setAttribute('aria-expanded', 'false');
+    if (otherAnswer) otherAnswer.hidden = true;
+  });
+  if (!expanded) {
+    item.classList.add('open');
+    button.setAttribute('aria-expanded', 'true');
+    answer.hidden = false;
+  }
+}
+
+const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+  if (entry.isIntersecting) entry.target.classList.add('visible');
+}), { threshold: .1 });
+document.querySelectorAll('.reveal').forEach((element, index) => {
+  element.style.transitionDelay = `${(index % 4) * .08}s`;
+  observer.observe(element);
+});
+</script>
+<a class="whatsapp-float" href="#" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp" title="Chat with us on WhatsApp">
+  <img src="whatsapp%20icon.jpg" alt="WhatsApp">
+</a>
+<script src="https://trtc.io/knocket-sdk/sdk.js?identifier=1f126c84338c406804&v=1789725075273" async></script>
+</body>
+</html>
